@@ -10,9 +10,7 @@
 
 AnyPPG is a **photoplethysmography (PPG) foundation model** pretrained on **over 100,000 hours** of synchronized PPG-ECG recordings from **58,796 subjects** through a CLIP-style contrastive alignment framework.
 
-AnyPPG demonstrates strong performance across a diverse range of downstream tasks, including conventional physiological analyses on six public datasets (e.g., heart rate estimation and atrial fibrillation detection) and large-scale ICD-10 disease diagnosis (chapters I-XV) on the MC-MED dataset, achieving an AUROC above 0.70 in 137 diseases, many of which are non-cardiovascular conditions (e.g., Parkinson’s disease and chronic kidney disease).
-
-
+AnyPPG demonstrates strong performance across a diverse range of downstream tasks, including conventional physiological analyses on six public datasets (e.g., heart rate estimation and atrial fibrillation detection) and large-scale ICD-10 disease diagnosis (chapters I-XV) on the MC-MED dataset, achieving an AUROC above 0.70 in 137 diseases, many of which are non-cardiovascular conditions (e.g., Parkinson's disease and chronic kidney disease).
 
 
 ---
