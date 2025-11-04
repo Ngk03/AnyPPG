@@ -1,0 +1,6 @@
+numpy==2.1.2
+pandas==2.3.3
+scipy==1.15.3
+scikit_learn==1.7.2
+joblib==1.5.2
+torch==2.9.0
