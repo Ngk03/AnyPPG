@@ -1,6 +1,12 @@
-# AnyPPG
-**AnyPPG: An ECG-Guided PPG Foundation Model Trained on Over 100,000 Hours of 1Recordings for Holistic Health Profilingh**
-[arXiv](https://arxiv.org/pdf/2511.01747).
+<div align="center">
+  <h1>AnyPPG</h1>
+  <h2>An ECG-Guided PPG Foundation Model Trained on Over 100,000 Hours of 1Recordings for Holistic Health Profiling</h2>
+  <p>
+    <a href="https://arxiv.org/pdf/2511.01747">
+      <img src="https://img.shields.io/badge/arXiv-2502.12345-b31b1b.svg" alt="arXiv">
+    </a>
+  </p>
+</div>
 
 
 AnyPPG is a **photoplethysmography (PPG) foundation model** pretrained on **over 100,000 hours** of synchronized PPG–electrocardiography (ECG) recordings from **58,796 subjects**.  
