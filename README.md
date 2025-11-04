@@ -1,44 +1,50 @@
 <div align="left">
   <h1>AnyPPG: An ECG-Guided PPG Foundation Model Trained on Over 100,000 Hours of Recordings for Holistic Health Profiling</h1>
   <p>
-    <a href="https://arxiv.org/pdf/2511.01747">
-      <img src="https://img.shields.io/badge/arXiv-2502.12345-b31b1b.svg" alt="arXiv">
+    <a href="https://arxiv.org/abs/2511.01747">
+      <img src="https://img.shields.io/badge/arXiv-2511.01747-b31b1b.svg" alt="arXiv">
     </a>
   </p>
+  <p><em>🚧 This work is under active development - ongoing improvements and new releases will follow.</em></p>
 </div>
-
-
-AnyPPG is a **photoplethysmography (PPG) foundation model** pretrained on **over 100,000 hours** of synchronized PPG-ECG recordings from **58,796 subjects** through a CLIP-style contrastive alignment framework.
-
-AnyPPG demonstrates strong performance across a diverse range of downstream tasks, including conventional physiological analyses on six public datasets (e.g., heart rate estimation and atrial fibrillation detection) and large-scale ICD-10 disease diagnosis (chapters I-XV) on the MC-MED dataset, achieving an AUROC above 0.70 in 137 diseases, many of which are non-cardiovascular conditions (e.g., Parkinson's disease and chronic kidney disease).
 
 
 ---
 
-## 🧩 Installation and Usage
+## 🩺 Overview
 
-The following script demonstrates the **complete workflow** — from installation to loading the pretrained encoder, extracting embeddings, and applying the model to downstream tasks via linear probing or fine-tuning.
+**AnyPPG** is a **photoplethysmography (PPG) foundation model** pretrained on **over 100,000 hours** of synchronized **PPG–ECG recordings** from **58,796 subjects**, using a **CLIP-style contrastive alignment framework** to learn physiologically meaningful representations.
+
+AnyPPG demonstrates strong and versatile performance across a wide range of downstream tasks, including:
+- **Conventional physiological analyses** on six public datasets (e.g., heart rate estimation, atrial fibrillation detection)  
+- **Large-scale ICD-10 disease diagnosis** (Chapters I–XV) on the **MC-MED dataset**, achieving an **AUROC above 0.70** in 137 diseases — including several **non-cardiovascular conditions** such as **Parkinson’s disease** and **chronic kidney disease**
+
+---
+
+## ⚙️ Getting Started
+
+### 🧩 Installation
+
+Clone the repository:
+```bash
+git clone https://github.com/Ngks03/AnyPPG.git
+cd AnyPPG
+```
+
+### 🧠 Using the AnyPPG Encoder
+
+The pretrained checkpoint is available at (./checkpoint/anyppg_ckpt.pth).
+
+**Input requirements**:
+
+- Sampling rate: 125 Hz
+- Normalization: z-score normalization along the time axis
 
 ```python
-# ===============================
-# 1. Environment Setup
-# ===============================
-# Clone the repository and install dependencies
-# !git clone https://github.com/Ngks03/AnyPPG.git
-# %cd AnyPPG
-# !pip install -r requirements.txt
-
 import torch
-import torch.nn as nn
-import torch.optim as optim
-from sklearn.linear_model import LogisticRegression
 from model.net1d import Net1D
-import numpy as np
 
-
-# ===============================
-# 2. Load the AnyPPG Encoder
-# ===============================
+# AnyPPG encoder configuration
 anyppg_cfg = {
     "in_channels": 1,
     "base_filters": 64,
@@ -50,79 +56,44 @@ anyppg_cfg = {
     "groups_width": 16,
     "verbose": False,
 }
+
+# Initialize encoder
 anyppg = Net1D(**anyppg_cfg)
 
 # Load pretrained model weights
 ckpt_path = "./checkpoint/anyppg_ckpt.pth"
 state_dict = torch.load(ckpt_path, map_location="cpu")
 anyppg.load_state_dict(state_dict)
-anyppg.eval()
-print("✅ AnyPPG encoder loaded successfully.")
+```
 
+### 📊 Downstream Usage
 
-# ===============================
-# 3. Linear Probing (Feature Extraction)
-# ===============================
-# Freeze encoder parameters
-for p in anyppg.parameters():
-    p.requires_grad = False
+To evaluate on a downstream task (e.g., heart rate regression or disease classification), freeze the encoder and attach a simple linear head:
+```python
+import torch.nn as nn
 
-# Example input (batch_size=8, 1 channel, 2048 samples)
-x = torch.randn(8, 1, 2048)
-with torch.no_grad():
-    features = anyppg(x)          # [batch, feature_dim, T]
-    features = features.mean(-1)  # temporal pooling → [batch, feature_dim]
+# Freeze encoder
+for param in anyppg.parameters():
+    param.requires_grad = False
 
-# Example dummy labels
-labels = torch.randint(0, 2, (8,))
+# Linear probing model
+linear_head = nn.Linear(1024, num_classes)  # num_classes depends on the task
+model = nn.Sequential(anyppg, linear_head)
+```
 
-# Train a simple linear classifier
-clf = LogisticRegression(max_iter=200)
-clf.fit(features.numpy(), labels.numpy())
-print("✅ Linear probing complete.")
+For full fine-tuning, simply unfreeze the encoder:
+```python
+for param in anyppg.parameters():
+    param.requires_grad = True
+```
 
-
-# ===============================
-# 4. End-to-End Fine-tuning
-# ===============================
-class LinearProbe(nn.Module):
-    def __init__(self, in_dim, num_classes):
-        super().__init__()
-        self.fc = nn.Linear(in_dim, num_classes)
-    def forward(self, x):
-        x = x.mean(dim=-1)
-        return self.fc(x)
-
-# Combine encoder and classification head
-model = nn.Sequential(anyppg, LinearProbe(in_dim=1024, num_classes=5))
-optimizer = optim.AdamW(model.parameters(), lr=1e-4, weight_decay=1e-2)
-criterion = nn.CrossEntropyLoss()
-
-# Example training step
-x = torch.randn(8, 1, 2048)
-y = torch.randint(0, 5, (8,))
-logits = model(x)
-loss = criterion(logits, y)
-loss.backward()
-optimizer.step()
-print("✅ Fine-tuning step complete.")
-
-
-# ===============================
-# 5. Feature Extraction for Downstream Analysis
-# ===============================
-anyppg.eval()
-embeddings, targets = [], []
-for i in range(10):  # simulated batches
-    batch_x = torch.randn(16, 1, 2048)
-    batch_y = torch.randint(0, 2, (16,))
-    with torch.no_grad():
-        feats = anyppg(batch_x).mean(dim=-1)
-    embeddings.append(feats.cpu().numpy())
-    targets.append(batch_y.numpy())
-
-embeddings = np.concatenate(embeddings)
-targets = np.concatenate(targets)
-np.save("features.npy", embeddings)
-np.save("labels.npy", targets)
-print("✅ Features saved for downstream analysis.")
+### 📘 Citation
+If you find AnyPPG useful in your research, please consider citing:
+```bibtex
+@article{nie2025anyppg,
+  title   = {AnyPPG: An ECG-Guided PPG Foundation Model Trained on Over 100,000 Hours of Recordings for Holistic Health Profiling},
+  author  = {Nie, Guangkun and Tang, Gongzheng and Xiao, Yujie and Li, Jun and Huang, Shun and Zhang, Deyun and Zhao, Qinghao and Hong, Shenda},
+  journal = {arXiv preprint arXiv:2511.01747},
+  year    = {2025}
+}
+```
