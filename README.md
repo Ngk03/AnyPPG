@@ -13,7 +13,7 @@
 
 ## 🩺 Overview
 
-**AnyPPG** is a **photoplethysmography (PPG) foundation model** pretrained on **over 100,000 hours** of synchronized **PPG–ECG recordings** from **58,796 subjects**, using a CLIP-style contrastive alignment framework to learn physiologically meaningful representations.
+**AnyPPG** is a **photoplethysmography (PPG) foundation model** pretrained on **over 100,000 hours** of synchronized **PPG-ECG recordings** from **58,796 subjects**, using a CLIP-style contrastive alignment framework to learn physiologically meaningful representations.
 
 AnyPPG demonstrates strong and versatile performance across a wide range of downstream tasks, including:
 - **Conventional physiological analyses** on six public datasets (e.g., heart rate estimation, atrial fibrillation detection). 
