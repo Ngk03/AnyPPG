@@ -17,7 +17,7 @@
 
 AnyPPG demonstrates strong and versatile performance across a wide range of downstream tasks, including:
 - **Conventional physiological analyses** on six public datasets (e.g., heart rate estimation, atrial fibrillation detection). 
-- **Large-scale ICD-10 disease diagnosis** (Chapters I-XV) on the MC-MED dataset, achieving an **AUROC above 0.70** in 137 diseases - many of which are non-cardiovascular conditions such as Parkinson's disease and chronic kidney disease.
+- **Large-scale ICD-10 disease diagnosis** (Chapters I-XV) on the MC-MED dataset, achieving an **AUROC above 0.70** in **137** diseases - many of which are non-cardiovascular conditions such as Parkinson's disease and chronic kidney disease.
 
 ---
 
