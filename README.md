@@ -1,5 +1,7 @@
 # AnyPPG
-**A PPG Foundation Model for Comprehensive Assessment of Multi-organ Health**
+**AnyPPG: An ECG-Guided PPG Foundation Model Trained on Over 100,000 Hours of 1Recordings for Holistic Health Profilingh**
+[arXiv](https://arxiv.org/pdf/2511.01747).
+
 
 AnyPPG is a **photoplethysmography (PPG) foundation model** pretrained on **over 100,000 hours** of synchronized PPG–electrocardiography (ECG) recordings from **58,796 subjects**.  
 By aligning PPG and ECG signals within a shared physiological embedding space, AnyPPG learns **generalizable and physiologically meaningful representations**, enabling robust downstream performance across a wide range of health-related tasks — from conventional signal analysis to large-scale multi-organ disease diagnosis.
