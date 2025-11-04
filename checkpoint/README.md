@@ -14,6 +14,6 @@ It serves as the initialization for downstream tasks such as linear probing or f
 - **Architecture:** 1D convolutional encoder (`Net1D`)
 - **Output:** 1024-dimensional physiological embedding
 
-## Note
+## 🧩 Note
 
 This checkpoint contains only the encoder parameters and does not include any downstream linear heads or task-specific adapters.
