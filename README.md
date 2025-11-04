@@ -33,7 +33,7 @@ cd AnyPPG
 
 ### 🧠 Using the AnyPPG Encoder
 
-The pretrained checkpoint is available at (./checkpoint/anyppg_ckpt.pth).
+The pretrained checkpoint is available at [./checkpoint/anyppg_ckpt.pth](./checkpoint/anyppg_ckpt.pth).
 
 **Input requirements**:
 
