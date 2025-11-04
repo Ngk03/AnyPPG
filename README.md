@@ -97,3 +97,8 @@ If you find AnyPPG useful in your research, please consider citing:
   year    = {2025}
 }
 ```
+
+### Acknowledgement
+This work builds upon the open-source implementation from:
+
+<https://github.com/hsd1503/resnet1d>
