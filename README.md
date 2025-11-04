@@ -27,7 +27,7 @@ AnyPPG demonstrates strong and versatile performance across a wide range of down
 
 Clone the repository:
 ```bash
-git clone https://github.com/Ngks03/AnyPPG.git
+git clone https://github.com/Ngk03/AnyPPG.git
 cd AnyPPG
 ```
 
