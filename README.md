@@ -1,6 +1,5 @@
-<div align="center">
-  <h1>AnyPPG</h1>
-  <h2>An ECG-Guided PPG Foundation Model Trained on Over 100,000 Hours of 1Recordings for Holistic Health Profiling</h2>
+<div align="left">
+  <h1>AnyPPG: An ECG-Guided PPG Foundation Model Trained on Over 100,000 Hours of 1Recordings for Holistic Health Profiling</h1>
   <p>
     <a href="https://arxiv.org/pdf/2511.01747">
       <img src="https://img.shields.io/badge/arXiv-2502.12345-b31b1b.svg" alt="arXiv">
