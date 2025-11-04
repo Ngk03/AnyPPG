@@ -8,8 +8,9 @@
 </div>
 
 
-AnyPPG is a **photoplethysmography (PPG) foundation model** pretrained on **over 100,000 hours** of synchronized PPG–electrocardiography (ECG) recordings from **58,796 subjects**.  
-By aligning PPG and ECG signals within a shared physiological embedding space, AnyPPG learns **generalizable and physiologically meaningful representations**, enabling robust downstream performance across a wide range of health-related tasks — from conventional signal analysis to large-scale multi-organ disease diagnosis.
+AnyPPG is a **photoplethysmography (PPG) foundation model** pretrained on **over 100,000 hours** of synchronized PPG-ECG recordings from **58,796 subjects**.  
+We evaluate it across a diverse set of downstream tasks, including conventional physiological analysis on six public datasets (e.g., heart rate estimation) and broader ICD-10 disease diagnosis on the MC-MED dataset, where it achieves an AUROC above 0.70 in 137 diseases.
+
 
 ---
 
